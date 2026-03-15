@@ -25,6 +25,5 @@ RUN bun add serve
 COPY --from=builder /app/apps/web/dist ./dist
 
 ENV NODE_ENV=production
-EXPOSE 3000
 
-CMD ["bunx", "serve", "dist", "-l", "3000"]
+CMD ["sh", "-c", "bunx serve dist -l tcp://0.0.0.0:${PORT:-3000}"]
