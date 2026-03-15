@@ -57,15 +57,13 @@ app.notFound((c) => {
   return c.json({ error: "Not found" }, 404);
 });
 
-export default app;
 export type AppType = typeof app;
 
 const port = Number(process.env.PORT) || 3001;
 
-Bun.serve({
+const server = Bun.serve({
   port,
   fetch: app.fetch,
-  reusePort: true,
 });
 
-console.log(`🏰 Team Camelot API running on port ${port}`);
+console.log(`🏰 Team Camelot API running on ${server.url}`);
