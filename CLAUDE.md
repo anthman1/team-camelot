@@ -1,6 +1,26 @@
-# Team Camelot
+# Team Camelot - AI Assistant Context
 
-A companion app for in-person tabletop RPG play. The game happens at the table—this app answers: **Who am I? Where am I? What can I do here?**
+> A companion app for in-person tabletop RPG play. The game happens at the table—this app answers: **Who am I? Where am I? What can I do here?**
+
+---
+
+## Documentation Maintenance
+
+**IMPORTANT**: Keep these documents up to date as the project evolves:
+
+| Document | Purpose | Update When |
+|----------|---------|-------------|
+| `CLAUDE.md` | AI context, conventions, patterns | Adding new patterns, changing conventions |
+| `README.md` | Human onboarding, quick start | Adding features, changing setup |
+| `PROJECT_STATUS.md` | Sprint tracking, decisions | Starting/completing tasks, making decisions |
+| `AGENTS.md` | Symlink to CLAUDE.md | N/A (auto-updates) |
+
+When making significant changes:
+1. Update the relevant doc inline with the code change
+2. Log decisions in PROJECT_STATUS.md with rationale
+3. Keep GitHub issues in sync with PROJECT_STATUS.md
+
+---
 
 ## Quick Start
 
@@ -8,7 +28,6 @@ A companion app for in-person tabletop RPG play. The game happens at the table�
 bun install          # Install dependencies
 bun run dev          # Start dev servers (web + api)
 bun run build        # Build all packages
-bun run lint         # Lint with Biome
 ```
 
 ## Tech Stack
@@ -127,6 +146,12 @@ function MyComponent() {
 1. Create file in `apps/web/src/routes/`
 2. TanStack Router auto-generates route tree
 
+### Add a new feature
+1. Create spec in GitHub issue first
+2. Update PROJECT_STATUS.md with task
+3. Implement following existing patterns
+4. Update docs if adding new conventions
+
 ## Environment Variables
 
 ### API (`apps/api/.env`)
@@ -142,6 +167,13 @@ PORT=3001
 VITE_API_URL=http://localhost:3001
 ```
 
+## Deployment
+
+### Railway
+- API and Web services deployed separately
+- Environment variables configured in Railway dashboard
+- Auto-deploys from `main` branch
+
 ## Key Decisions
 
 - **No SSR**: Pure SPA for simplicity; offline support deferred
@@ -149,3 +181,25 @@ VITE_API_URL=http://localhost:3001
 - **Drizzle over Prisma**: Better Bun support, lighter weight
 - **Panda CSS**: Zero-runtime styling with theme conditions
 - **File-based routing**: Matches mental model of pages
+
+---
+
+## Architecture Notes
+
+### Auth Flow
+1. User gets join link with game ID
+2. `/auth/dev/join/:gameId/:username` creates user + adds to game + returns JWT
+3. JWT stored in localStorage, sent as Bearer token
+4. Protected routes check token via `authMiddleware`
+
+### Theme System
+1. `ThemeProvider` wraps app, manages `data-theme` attribute
+2. Panda CSS conditions (`_nineties`, etc.) apply theme-specific styles
+3. Semantic tokens (`bg.canvas`, `fg`, `accent`) resolve per-theme
+4. localStorage persists theme preference
+
+### Data Flow
+1. TanStack Query manages server state (games, characters, etc.)
+2. Zustand manages UI state (auth, current game, preferences)
+3. API calls go through `apps/web/src/lib/api.ts`
+4. Hono validates with Zod schemas from `packages/shared`

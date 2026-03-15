@@ -7,6 +7,7 @@
     "dev": "panda codegen && vite",
     "build": "panda codegen && tsc -b && vite build",
     "preview": "vite preview",
+    "start": "vite preview --host --port ${PORT:-3000}",
     "lint": "biome check src"
   },
   "dependencies": {
