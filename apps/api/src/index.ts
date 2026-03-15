@@ -15,7 +15,11 @@ app.use("*", prettyJSON());
 app.use(
   "*",
   cors({
-    origin: ["http://localhost:5173", "http://localhost:3000"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://web-production-4632a.up.railway.app",
+    ],
     credentials: true,
   })
 );
@@ -56,10 +60,12 @@ app.notFound((c) => {
 export default app;
 export type AppType = typeof app;
 
-const port = process.env.PORT || 3001;
-console.log(`🏰 Team Camelot API running on http://localhost:${port}`);
+const port = Number(process.env.PORT) || 3001;
 
 Bun.serve({
   port,
   fetch: app.fetch,
+  reusePort: true,
 });
+
+console.log(`🏰 Team Camelot API running on port ${port}`);
