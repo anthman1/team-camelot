@@ -7,7 +7,7 @@ COPY package.json bun.lockb ./
 COPY apps/web/package.json ./apps/web/
 COPY packages/ui/package.json ./packages/ui/
 COPY packages/shared/package.json ./packages/shared/
-RUN bun install --frozen-lockfile
+RUN bun install
 
 # Build
 FROM base AS builder

@@ -7,7 +7,7 @@ COPY package.json bun.lockb ./
 COPY apps/api/package.json ./apps/api/
 COPY packages/shared/package.json ./packages/shared/
 COPY packages/game-logic/package.json ./packages/game-logic/
-RUN bun install --frozen-lockfile
+RUN bun install
 
 # Build
 FROM base AS builder
