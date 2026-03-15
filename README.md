@@ -86,8 +86,10 @@ http://localhost:5173/dev/join/{gameId}/{username}
 ## Deployment
 
 Deployed on Railway:
-- **API**: [railway.app link]
-- **Web**: [railway.app link]
+- **API**: https://api-production-0896.up.railway.app
+- **Web**: https://web-production-4632a.up.railway.app
+
+Health check: https://api-production-0896.up.railway.app/health
 
 ## License
 

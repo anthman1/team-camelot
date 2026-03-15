@@ -16,10 +16,13 @@
 - [x] Theme switcher demo on home page
 
 ### To Do
-- [ ] Set up Railway deployment
-- [ ] Configure Neon database connection
-- [ ] Test full auth flow with real database
-- [ ] Add production environment variables
+- [ ] Test full auth flow on production
+- [ ] Add custom domains (optional)
+
+### Recently Completed
+- [x] Set up Railway deployment (API + Web)
+- [x] Configure Neon database connection
+- [x] Add production environment variables
 
 ### Blocked
 - Database migrations need Neon connection (waiting for DATABASE_URL)
@@ -31,10 +34,11 @@ Foundation complete when:
 2. [x] Theme switcher toggles between Nineties/Paperwhite/Medieval
 3. [x] Components render correctly in all themes
 4. [x] API returns health check at `/health`
-5. [ ] Database connection works (needs env var)
-6. [ ] `/auth/dev/join/:gameId/:username` creates dev user
+5. [x] Database connection works
+6. [x] `/auth/dev/join/:gameId/:username` creates dev user
 7. [x] Biome configured
 8. [x] `bun run build` produces optimized bundles
+9. [x] Deployed to Railway (API + Web)
 
 ## Decisions Log
 
